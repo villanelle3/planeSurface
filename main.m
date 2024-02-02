@@ -76,14 +76,16 @@ while t <= tf + dt % Início do avanço temporal
     dta = min(dx / max(abs(real(ufis(:)))), dy / max(abs(real(vfis(:))))); % dt advectivo
     dt = cfl * min(dta, dtd); % Discretização do tempo
 
-    %   pos_processamento; % Subrotina que gera os arquivos de saída
+    % [up, vp, pp, wwp, divV] = pos_processamento(fx, fy, nstep, t, dt, u, ...
+    %     v, ufis, vfis, iimin, zp, Lx, Ly, nx, ny, dy, jmax, ni, umax, kx, ...
+    %     ky, k2); % Subrotina que gera os arquivos de saída
 
     % Esquema de avanço temporal (subrotina avanco_temporal.f90)
-    % rk46DF;
+    [ufis, vfis] = RK46DF(dt, ni, nx, ny, ufis, vfis, kx, ky, k2, u, v);
+
     % forcaDF; % Imposição da força (subrotina directforcing.f90)
     % projecao(u, v);
 
     nstep = nstep + 1; % Incremento de nstep
     t = t + dt; % nstep * dt; % Incremento do tempo de dt
 end % Fim do avanço temporal
-
