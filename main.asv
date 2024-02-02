@@ -1,7 +1,7 @@
 clear; clc;
 % -------------------------------------------------------------------------
 % Load input data
-[nx, ny, Ly, Re, rho, umax, ucf, cfl, tf, tsave, tsavec, tempoE, start, ...
+[nx, ny, Ly, Re, rho, umax, ucf, cfl, tf, tsave, nsavec, tempoE, start, ...
     nstep_restart, filtro, t_ci, alpha_buffer, eb, tipo, BIF, nit, nfi, ...
     n_threads, d] = dados_entrada();
 
@@ -76,14 +76,17 @@ while t <= tf + dt % Início do avanço temporal
     dta = min(dx / max(abs(real(ufis(:)))), dy / max(abs(real(vfis(:))))); % dt advectivo
     dt = cfl * min(dta, dtd); % Discretização do tempo
 
-    %   pos_processamento; % Subrotina que gera os arquivos de saída
+    [up, vp, pp, wwp, divV] = pos_processamento(fx, fy, nstep, t, dt, u, ...
+        v, ufis, vfis, iimin, zp, Lx, Ly, nx, ny, dy, jmax, ni, umax, kx, ...
+        ky, k2); % Subrotina que gera os arquivos de saída
 
     % Esquema de avanço temporal (subrotina avanco_temporal.f90)
-    rk46DF;
-    forcaDF; % Imposição da força (subrotina directforcing.f90)
-    projecao(u, v);
+    [ufis, vfis, u, v] = RK46DF(dt, ni, nx, ny, ufis, vfis, kx, ky, k2, u, v);
+    [fx, fy, u, v, ufis, vfis] = forcaDF(u, v, ufis, vfis, nx,...
+        ny, phi, Qtx, Qty, kx, ky, k2, nit, jmax, jjmax, dt, zp, rho,...
+        nstep, nsavec, iimin, iimax, dy, umax, ni);
+    [u, v] = projecao(u, v, nx, ny, kx, ky, k2);
 
     nstep = nstep + 1; % Incremento de nstep
     t = t + dt; % nstep * dt; % Incremento do tempo de dt
 end % Fim do avanço temporal
-
