@@ -1,4 +1,4 @@
-function [fx, fy, u, v, ufis, vfis] = forcaDF(u, v, ufis, vfis, nx, ny, phi, Qtx, Qty, kx, ky, k2, nit, jmax, jjmax, dt, zp, rho, nstep, nsavec)
+function [fx, fy, u, v, ufis, vfis] = forcaDF(u, v, ufis, vfis, nx, ny, phi, Qtx, Qty, kx, ky, k2, nit, jmax, jjmax, dt, zp, rho, nstep, nsavec, iimin, iimax, dy, umax, ni)
     % Complex arrays
     F0x = zeros(nx, ny);
     F0y = zeros(nx, ny);

@@ -24,7 +24,7 @@ function [nx, ny, Ly, Re, rho, umax, ucf, CFL, tf, tsave, tsavec, tempoE, ...
     eb = 3;              % exponecial_buffer
     tipo = 'MDF';        % MDF ou MFV ou BF
     BIF = 0;             % BIF - 1 se variaveis bifasicas; 0 se nao bifasico
-    nit = 100;           % nit - numero de iteracoes do MDF
+    nit = 50;            % nit - numero de iteracoes do MDF
     nfi = 0;             % nfi - numero de fronteiras imersas
     n_threads = 1;       % n_threads - numero de threads
     d = 1;               % diametro

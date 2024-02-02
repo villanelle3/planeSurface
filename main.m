@@ -84,7 +84,7 @@ while t <= tf + dt % Início do avanço temporal
     [ufis, vfis, u, v] = RK46DF(dt, ni, nx, ny, ufis, vfis, kx, ky, k2, u, v);
     [fx, fy, u, v, ufis, vfis] = forcaDF(u, v, ufis, vfis, nx,...
         ny, phi, Qtx, Qty, kx, ky, k2, nit, jmax, jjmax, dt, zp, rho,...
-        nstep, nsavec);
+        nstep, nsavec, iimin, iimax, dy, umax, ni);
     [u, v] = projecao(u, v, nx, ny, kx, ky, k2);
 
     nstep = nstep + 1; % Incremento de nstep
