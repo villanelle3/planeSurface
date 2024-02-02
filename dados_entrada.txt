@@ -1,0 +1,41 @@
+16		#nx
+8			#ny
+0.38d0		#Ly dimensional
+1.0d4		#Re
+1.0d0		#rho
+1.0d0		#umax
+0.3d0		#ucf
+0.5d0		#CFL
+10.0d0		#tf - tempo final de simulacao
+0.005d0		#tsave
+1400		#tsavec campos do escoamento
+200.0d0		#tempo para comecar as estatisticas
+0			#start
+2			#nstep_restart
+0			#tipo de filtro
+5			#condicao inicial
+1.00d0		#alpha_buffer
+3			#exponecial_buffer
+MDF			#MDF ou MFV ou BF (MDF-Multi-Direct Forcing; MFV-Modelo Fisico Virtual; BF-bifasico)
+0			#BIF - 1 se variaveis bifasicas; 0 se nao bifasico
+1000		#nit - numero de iteracoes do MDF
+0			#nfi - numero de fronteiras imersas
+1			#n_threads - numero de threads
+1			#diametro
+
+
+
+start ( 0 - começa em t=0
+	 1 - começa em t=nstep_restart*dt)
+
+tipo de filtro ( 0 - sem filtro
+		   1 - Raised cosine
+		   2 - Sharpened raised cosine
+		   3 - Lanczos
+		   4 - Exponencial)
+
+condicao inicial ( 0 - u=0; v=0; p=0
+		   1 - u=umax; v=0; p=0
+		   2 - ci de Green-Taylor
+		   3 - ci solucao manufaturada com termo-fonte
+		   4 - Jato temporal)
